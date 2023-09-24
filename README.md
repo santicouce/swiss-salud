@@ -19,3 +19,5 @@ La materia prima de este negocio se compone de telas, botones, cierres, entre ot
 - Consultar el stock de materia prima.
 - Consultar la materia prima faltante para producir los pedidos pendientes.
 - Consultar los pedidos que deben entregarse en una fecha determinada.
+- 
+WIP: https://app.swaggerhub.com/apis/SCOUCE_1/eclipse/1.0.0#/
