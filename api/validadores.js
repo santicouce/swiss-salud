@@ -1,3 +1,5 @@
+const { FAMILIAS } = require('./data');
+
 function validarEstructuraFamilia(req, res, next) {
     const { apellido, metodoPago } = req.body;
     if (!apellido || !metodoPago) {
@@ -14,6 +16,24 @@ function validarMetodoPago(req, res, next) {
     next();
 }
 
+function validarEstructuraMiembro(req, res, next) {
+    const { nombre, apellido, fechaNacimiento, familiaId, inicioCobertura, finCobertura } = req.body;
+    if (!nombre || !apellido || !fechaNacimiento || !familiaId || !inicioCobertura || !finCobertura) {
+      return res.status(400).json({ error: 'Los campos "nombre", "apellido", "fechaNacimiento", "familiaId", "inicioCobertura", "finCobertura" son obligatorios.' });
+    }
+    validarFamiliaExiste(req, res, next);
+}
+
+function validarFamiliaExiste(req, res, next) {
+    const { familiaId } = req.body;
+    const familia = FAMILIAS.find(f => f.id === familiaId);
+    if (!familia) {
+      return res.status(400).json({ error: `La familia ${familiaId} no existe.` });
+    }
+    next();
+}
+
 module.exports = {
-    validarEstructuraFamilia
+    validarEstructuraFamilia,
+    validarEstructuraMiembro
 };
