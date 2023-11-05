@@ -3,14 +3,12 @@ const FAMILIAS = [
     {
         "id": 1,
         "apellido": "Perez",
-        "inicioCobertura": "01-01-2024",
-        "finCobertura": "01-01-2025",
+        "metodoPago": "debito",
     },
     {
         "id": 2,
         "apellido": "Couce",
-        "inicioCobertura": "01-12-2023",
-        "finCobertura": "01-12-2024",
+        "metodoPago": "cheque",
     }
 ];
 
@@ -21,6 +19,8 @@ const MIEMBROS = [
         "apellido": "Perez",
         "fechaNacimiento": "01-01-2000",
         "familiaId": 1,
+        "inicioCobertura": "01-01-2024",
+        "finCobertura": "01-01-2025",
     },
     {
         "id": 2,
@@ -28,6 +28,8 @@ const MIEMBROS = [
         "apellido": "Perez",
         "fechaNacimiento": "01-01-2000",
         "familiaId": 1,
+        "inicioCobertura": "01-01-2024",
+        "finCobertura": "01-01-2025",
     },
     {
         "id": 3,
@@ -35,6 +37,8 @@ const MIEMBROS = [
         "apellido": "Couce",
         "fechaNacimiento": "01-01-2000",
         "familiaId": 2,
+        "inicioCobertura": "01-01-2024",
+        "finCobertura": "01-01-2025",
     },
     {
         "id": 4,
@@ -42,6 +46,8 @@ const MIEMBROS = [
         "apellido": "Couce",
         "fechaNacimiento": "01-01-2000",
         "familiaId": 2,
+        "inicioCobertura": "01-01-2024",
+        "finCobertura": "01-01-2025",
     }
 ];
 
