@@ -1,2 +1,4 @@
 # Ignorar el virtual env
 venv/*
+
+node_modules/*
