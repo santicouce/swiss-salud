@@ -1,7 +1,7 @@
 function validarEstructuraPlan(req, res, next) {
-    const { nombre, precio, descripcion } = req.body;
-    if (!nombre || !precio || !descripcion) {
-        return res.status(400).json({ error: 'Debe proveer datos de nombre, precio y descripcion.' });
+    const { nombre, precio, descripcion, categoria } = req.body;
+    if (!nombre || !precio || !descripcion || categoria) {
+        return res.status(400).json({ error: 'Los campos nombre, precio, descripcion y categoria son obligatorios.' });
     }
     next();
 }

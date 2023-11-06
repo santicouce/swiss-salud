@@ -77,6 +77,9 @@ router.patch('/:miembroId', (req, res) => {
     res.send('Miembro actualizado exitosamente!, id: ' + id);
 })
 
+
+
+
 /**
  * @swagger
  * /miembros/onboarding-estados:

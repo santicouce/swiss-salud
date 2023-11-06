@@ -3,6 +3,8 @@ const router = express.Router();
 const { FAMILIAS, MIEMBROS } = require('../data');
 const { validarEstructuraFamilia } = require('./validadores');
 const { crearMiembro, borrarMiembro } = require('../miembros/utils');
+const { obtenerPrecioPlanMasBarato } = require('../planes/utils');
+
 
 /**
  * @swagger
@@ -220,5 +222,29 @@ router.get('/:familiaId/miembros', (req, res) => {
     const miembros = MIEMBROS.filter(m => m.familiaId === id);
     res.send(miembros);
 })
+
+/**
+ * @swagger
+ * /familias/avisar-poco-presupuesto:
+ *   post:
+ *     summary: Enviar correo electrónico de aviso a familias con presupuesto bajo.
+ *     tags:
+ *       - Familias
+ *     responses:
+ *       200:
+ *         description: Email enviado a familias con presupuesto bajo.
+ */
+router.post('/avisar-poco-presupuesto', (req, res) => {
+    const precioPlanMasBarato = obtenerPrecioPlanMasBarato();
+
+    FAMILIAS.forEach(familia => {
+        if (familia.presupuesto < precioPlanMasBarato) {
+            console.log('Email enviado a la familia con presupuesto bajo: ' + familia.apellido);
+        }
+    });
+
+    res.status(200).send('Email enviado a familias con presupuesto bajo.');
+});
+
 
 module.exports = router;

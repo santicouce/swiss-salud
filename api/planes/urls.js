@@ -22,12 +22,12 @@ router.get('/', (req, res) => {
  * @swagger
  * /planes/{planId}:
  *   get:
- *     summary: Obtener detalles de un plan.
+ *     summary: Obtener detalles de un plan o filtrar por categoría.
  *     tags:
  *       - Planes
  *     responses:
  *       200:
- *         description: Detalles de un plan.
+ *         description: Detalles de un plan o lista de planes filtrados.
  *     parameters:
  *       - in: path
  *         name: planId
@@ -35,15 +35,29 @@ router.get('/', (req, res) => {
  *         description: ID del plan a obtener
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: categoria
+ *         schema:
+ *           type: string
+ *         description: Filtrar por categoría.
  */
 router.get('/:planId', (req, res) => {
     const id = parseInt(req.params.planId);
-    const plan = PLANES.find(p => p.id === id);
-    if (!plan) {
-        return res.status(400).json({ error: `El plan ${id} no existe.` });
+    const categoria = req.query.categoria; // Obtener el valor de la consulta "categoria"
+
+    if (categoria) {
+        // Filtrar planes por categoría si se proporciona una consulta "categoria"
+        const planesFiltrados = PLANES.filter(plan => plan.categoria === categoria);
+        res.send(planesFiltrados);
+    } else {
+        // Obtener detalles de un plan específico si no se proporciona "categoria"
+        const plan = PLANES.find(p => p.id === id);
+        if (!plan) {
+            return res.status(400).json({ error: `El plan ${id} no existe.` });
+        }
+        res.send(plan);
     }
-    res.send(plan)
-})
+});
 
 /**
  * @swagger
