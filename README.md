@@ -16,10 +16,11 @@ Se incluyen metodos para dar de alta, modificar, borrar, y combinar las entidade
 - Dar de baja un miembro.
 - Actualizar datos de un miembro.
 - Obtener listado de todos los miembros que pertenecen a un grupo familiar.
+- Obtener listado de miembros elegibles para renovar su plan proximo a expirar.
 - Dar de alta un grupo familiar.
 - Dar de baja un grupo familiar.
 - Obtener listado de todos los grupos familiares.
-- Marcar un miembro como integrante de un grupo familiar.
+- Notificar via email a los grupos familiares que tengan poco presupuesto.
 - Crear un plan.
 - Modificar un plan.
 - Dar de baja un plan
