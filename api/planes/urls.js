@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { PLANES } = require('../data');
+const { validarEstructuraPlan } = require('./validadores');
 
 /**
  * @swagger
@@ -63,7 +64,7 @@ router.get('/:planId', (req, res) => {
  *             descripcion: "Plan que contiene beneficios basicos hasta mil dolares de cobertura"
  *             precio: 2000
  */
-router.post('/', (req, res) => {
+router.post('/', validarEstructuraPlan, (req, res) => {
     const nuevoPlan = req.body;
     const ultimoID = PLANES.length > 0 ? PLANES[PLANES.length - 1].id : null;
     nuevoPlan.id = ultimoID ? ultimoID + 1 : 1;
