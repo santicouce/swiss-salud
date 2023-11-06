@@ -31,3 +31,8 @@ Ademas, los metodos para obtener informacion, permitiran filtrar estos datos a t
 ## Documentacion
 
 Para ver la documentacion completa de la API acceder a la ruta /api-docs
+
+## Logica de negocio
+
+- Al crear un miembro, si no se proporciona un planId, el estado de onboarding sera "en progreso". Una vez que el miembro tenga un plan asociado, el estado de onbarding pasara a "completo".
+- La familia tiene un presupuesto mensual que se setea al crear la familia. A medidca que se van agregando miembros, se verificara que haya presupuesto disponible para el pago del plan asociado al nuevo miembro.

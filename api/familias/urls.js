@@ -146,6 +146,7 @@ router.patch('/:familiaId', (req, res) => {
  *             fechaNacimiento: "01-01-2000"
  *             inicioCobertura: "01-01-2024"
  *             finCobertura: "01-01-2025"
+ *             planId: 1
  *     responses:
  *       201:
  *         description: Miembro creado exitosamente

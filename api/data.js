@@ -4,11 +4,13 @@ const FAMILIAS = [
         "id": 1,
         "apellido": "Perez",
         "metodoPago": "debito",
+        "presupuesto": 30000,
     },
     {
         "id": 2,
         "apellido": "Couce",
         "metodoPago": "cheque",
+        "presupuesto": 50000,
     }
 ];
 
@@ -21,6 +23,8 @@ const MIEMBROS = [
         "familiaId": 1,
         "inicioCobertura": "01-01-2024",
         "finCobertura": "01-01-2025",
+        "planId": 1,
+        "onboarding": 'completo',
     },
     {
         "id": 2,
@@ -30,6 +34,8 @@ const MIEMBROS = [
         "familiaId": 1,
         "inicioCobertura": "01-01-2024",
         "finCobertura": "01-01-2025",
+        "planId": 1,
+        "onboarding": 'completo',
     },
     {
         "id": 3,
@@ -39,6 +45,8 @@ const MIEMBROS = [
         "familiaId": 2,
         "inicioCobertura": "01-01-2024",
         "finCobertura": "01-01-2025",
+        "planId": 2,
+        "onboarding": 'completo',
     },
     {
         "id": 4,
@@ -48,6 +56,8 @@ const MIEMBROS = [
         "familiaId": 2,
         "inicioCobertura": "01-01-2024",
         "finCobertura": "01-01-2025",
+        "planId": null,
+        "onboarding": 'en progreso',
     }
 ];
 

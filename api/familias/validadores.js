@@ -1,7 +1,7 @@
 function validarEstructuraFamilia(req, res, next) {
-    const { apellido, metodoPago } = req.body;
-    if (!apellido || !metodoPago) {
-      return res.status(400).json({ error: 'Los campos "apellido", "metodoPago" son obligatorios.' });
+    const { apellido, metodoPago, presupuesto} = req.body;
+    if (!apellido || !metodoPago || !presupuesto) {
+      return res.status(400).json({ error: 'Los campos "apellido", "metodoPago" y "presupuesto" son obligatorios.' });
     }
     validarMetodoPago(req, res, next);
   }
