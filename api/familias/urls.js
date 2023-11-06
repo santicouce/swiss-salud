@@ -23,6 +23,38 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
+ * /familias/{familiaId}:
+ *   get:
+ *     summary: Obtener una familia por su ID.
+ *     tags:
+ *       - Familias
+ *     parameters:
+ *       - in: path
+ *         name: familiaId
+ *         required: true
+ *         description: ID de la familia a obtener.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Detalles de la familia.
+ *       404:
+ *         description: La familia no existe.
+ */
+router.get('/:familiaId', (req, res) => {
+    const familiaId = parseInt(req.params.familiaId);
+    const familia = FAMILIAS.find(f => f.id === familiaId);
+
+    if (familia) {
+        res.json(familia);
+    } else {
+        res.status(404).json({ error: `La familia con ID ${familiaId} no existe.` });
+    }
+});
+
+
+/**
+ * @swagger
  * /familias:
  *   post:
  *     summary: Crear una familia.
@@ -326,6 +358,54 @@ router.get('/:familiaId/miembros', (req, res) => {
     const miembros = MIEMBROS.filter(m => m.familiaId === id);
     res.send(miembros);
 })
+
+/**
+ * @swagger
+ * /familias/{familiaId}/miembros/{miembroId}:
+ *   get:
+ *     summary: Obtener detalles de un miembro por su ID.
+ *     tags:
+ *       - Familias
+ *     parameters:
+ *       - in: path
+ *         name: familiaId
+ *         required: true
+ *         description: ID de la familia a la que pertenece el miembro.
+ *         schema:
+ *           type: integer
+ *       - in: path
+ *         name: miembroId
+ *         required: true
+ *         description: ID del miembro a obtener.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Detalles del miembro.
+ *       404:
+ *         description: El miembro no existe.
+ */
+router.get('/:familiaId/miembros/:miembroId', (req, res) => {
+    const familiaId = parseInt(req.params.familiaId);
+    const miembroId = parseInt(req.params.miembroId);
+
+    // Buscar la familia con el ID proporcionado
+    const familia = FAMILIAS.find(f => f.id === familiaId);
+
+    if (!familia) {
+        return res.status(404).json({ error: `La familia con ID ${familiaId} no existe.` });
+    }
+
+    // Buscar el miembro en la familia
+    const miembro = MIEMBROS.find(m => m.id === miembroId && m.familiaId === familiaId);
+
+    if (miembro) {
+        res.json(miembro);
+    } else {
+        res.status(404).json({ error: `El miembro con ID ${miembroId} no existe en la familia con ID ${familiaId}.` });
+    }
+});
+
 
 /**
  * @swagger
