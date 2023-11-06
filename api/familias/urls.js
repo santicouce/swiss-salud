@@ -126,6 +126,51 @@ router.patch('/:familiaId', (req, res) => {
 
 /**
  * @swagger
+ * /familias/{familiaId}:
+ *   put:
+ *     summary: Actualizar una familia existente en su totalidad.
+ *     tags:
+ *       - Familias
+ *     responses:
+ *       200:
+ *         description: Familia actualizada.
+ *     parameters:
+ *       - in: path
+ *         name: familiaId
+ *         required: true
+ *         description: ID de la familia a actualizar
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             apellido: "Apellido Actualizado"
+ *             inicioCobertura: "02/01/2024"
+ *             presupuesto: 3000
+ */
+router.put('/:familiaId', validarEstructuraFamilia, (req, res) => {
+    const id = parseInt(req.params.familiaId);
+    const familia = FAMILIAS.find(f => f.id === id);
+
+    if (!familia) {
+        return res.status(400).json({ error: `La familia ${id} no existe.` });
+    }
+
+    // Reemplazar completamente los parámetros de la familia con los valores proporcionados en el cuerpo de la solicitud
+    const { apellido, inicioCobertura, presupuesto } = req.body;
+    familia.apellido = apellido;
+    familia.inicioCobertura = inicioCobertura;
+    familia.presupuesto = presupuesto;
+
+    res.status(200);
+    res.send('Familia actualizada exitosamente!, id: ' + id);
+});
+
+
+/**
+ * @swagger
  * /familias/{familiaId}/miembros:
  *   post:
  *     summary: Crear un miembro perteneciente a la familia.
@@ -192,6 +237,65 @@ router.delete('/:familiaId/miembros/:miembroId', (req, res) => {
     res.status(204);
     res.send('Miembro borrado exitosamente!, id: ' + miembroId);
 })
+
+/**
+ * @swagger
+ * familias/{familiaId}/miembros/{miembroId}:
+ *   put:
+ *     summary: Actualizar un miembro existente en su totalidad.
+ *     tags:
+ *       - Familias
+ *     responses:
+ *       200:
+ *         description: Miembro actualizado.
+ *     parameters:
+ *       - in: path
+ *         name: miembroId
+ *         required: true
+ *         description: ID del miembro a actualizar
+ *         schema:
+ *           type: integer
+ *       - in: path
+ *         name: familiaId
+ *         required: true
+ *         description: ID de la familia a la cual pertenece el miembro a actualizar
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             nombre: "Nombre Actualizado"
+ *             apellido: "Apellido Actualizado"
+ *             fechaNacimiento: "02/02/1990"
+ *             familiaId: 2
+ *             inicioCobertura: "02/01/2024"
+ *             finCobertura: "02/01/2025"
+ *             planId: 1
+ */
+router.put('/:familiaId/miembros/:miembroId', (req, res) => {
+    const id = parseInt(req.params.miembroId);
+    const miembro = MIEMBROS.find(m => m.id === id);
+
+    if (!miembro) {
+        return res.status(400).json({ error: `El miembro ${id} no existe.` });
+    }
+
+    // Reemplazar completamente los parámetros del miembro con los valores proporcionados en el cuerpo de la solicitud
+    const { nombre, apellido, fechaNacimiento, familiaId, inicioCobertura, finCobertura, planId } = req.body;
+    miembro.nombre = nombre;
+    miembro.apellido = apellido;
+    miembro.fechaNacimiento = fechaNacimiento;
+    miembro.familiaId = familiaId;
+    miembro.inicioCobertura = inicioCobertura;
+    miembro.finCobertura = finCobertura;
+    miembro.planId = planId;
+
+    res.status(200);
+    res.send('Miembro actualizado exitosamente!, id: ' + id);
+});
+
 
 /**
  * @swagger

@@ -88,4 +88,138 @@ router.post('/', validarEstructuraPlan, (req, res) => {
     res.send('Plan creado exitosamente!, id: ' + nuevoPlan.id);
 })
 
+/**
+ * @swagger
+ * /planes/{planId}:
+ *   patch:
+ *     summary: Actualizar un plan existente.
+ *     tags:
+ *       - Planes
+ *     responses:
+ *       200:
+ *         description: Plan actualizado.
+ *     parameters:
+ *       - in: path
+ *         name: planId
+ *         required: true
+ *         description: ID del plan a actualizar
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             nombre: "Plan Actualizado"
+ *             descripcion: "Descripción actualizada"
+ *             precio: 2500
+ *             categoria: "media"
+ */
+router.patch('/:planId', (req, res) => {
+    const id = parseInt(req.params.planId);
+    const plan = PLANES.find(p => p.id === id);
+
+    if (!plan) {
+        return res.status(400).json({ error: `El plan ${id} no existe.` });
+    }
+
+    // Actualizar los parámetros del plan con los valores proporcionados en el cuerpo de la solicitud
+    const { nombre, descripcion, precio, categoria } = req.body;
+    if (nombre) {
+        plan.nombre = nombre;
+    }
+    if (descripcion) {
+        plan.descripcion = descripcion;
+    }
+    if (precio) {
+        plan.precio = precio;
+    }
+    if (categoria) {
+        plan.categoria = categoria;
+    }
+
+    res.status(200);
+    res.send('Plan actualizado exitosamente!, id: ' + id);
+});
+
+/**
+ * @swagger
+ * /planes/{planId}:
+ *   delete:
+ *     summary: Eliminar un plan.
+ *     tags:
+ *       - Planes
+ *     responses:
+ *       204:
+ *         description: Plan eliminado.
+ *     parameters:
+ *       - in: path
+ *         name: planId
+ *         required: true
+ *         description: ID del plan a eliminar
+ *         schema:
+ *           type: integer
+ */
+router.delete('/:planId', (req, res) => {
+    const id = parseInt(req.params.planId);
+    const planIndex = PLANES.findIndex(plan => plan.id === id);
+
+    if (planIndex === -1) {
+        return res.status(400).json({ error: `El plan ${id} no existe.` });
+    }
+
+    // Eliminar el plan de la lista de PLANES
+    PLANES.splice(planIndex, 1);
+
+    res.status(204);
+    res.send('Plan eliminado exitosamente!, id: ' + id);
+});
+
+/**
+ * @swagger
+ * /planes/{planId}:
+ *   put:
+ *     summary: Actualizar un plan existente en su totalidad.
+ *     tags:
+ *       - Planes
+ *     responses:
+ *       200:
+ *         description: Plan actualizado.
+ *     parameters:
+ *       - in: path
+ *         name: planId
+ *         required: true
+ *         description: ID del plan a actualizar
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             nombre: "Plan Actualizado"
+ *             descripcion: "Descripción actualizada"
+ *             precio: 2500
+ *             categoria: "media"
+ */
+router.put('/:planId', validarEstructuraPlan, (req, res) => {
+    const id = parseInt(req.params.planId);
+    const plan = PLANES.find(p => p.id === id);
+
+    if (!plan) {
+        return res.status(400).json({ error: `El plan ${id} no existe.` });
+    }
+
+    // Reemplazar completamente los parámetros del plan con los valores proporcionados en el cuerpo de la solicitud
+    const { nombre, descripcion, precio, categoria } = req.body;
+    plan.nombre = nombre;
+    plan.descripcion = descripcion;
+    plan.precio = precio;
+    plan.categoria = categoria;
+
+    res.status(200);
+    res.send('Plan actualizado exitosamente!, id: ' + id);
+});
+
+
 module.exports = router;
