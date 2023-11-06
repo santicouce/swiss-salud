@@ -45,3 +45,6 @@ Localmente sería http://localhost:3000/api-docs
 - Se considera que las familias tienen presupuesto bajo si su presupuesto actual es menor que el precio del plan mas barato que estamos ofreciendo.
 - Un plan puede ser de categoria superior, media o baja.
 - Un miembro es elegible a renovar su cobertura proxima a vencer si: falta menos de un mes para su fecha de fin de cobertura, el estado de onboarding es completo y su grupo familiar tiene mas de 4 miembros asociados.
+
+##
+Comando para correr en local: nodemon app.js

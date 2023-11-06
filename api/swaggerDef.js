@@ -7,6 +7,6 @@ module.exports = {
         description: 'Documentación de la API Swiss Salud',
       },
     },
-    apis: ['./apps.js', './miembros/urls.js', './familias/urls.js', './planes/urls.js'],
+    apis: ['./apps.js', './miembros/urls.js', './familias/urls.js', './planes/urls.js', './reportes/urls.js'],
   };
   
