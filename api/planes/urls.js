@@ -7,16 +7,41 @@ const { validarEstructuraPlan } = require('./validadores');
  * @swagger
  * /planes:
  *   get:
- *     summary: Obtener todos las planes disponibles.
+ *     summary: Obtener todos las planes disponibles (con filtro por precio y categoría).
  *     tags:
  *       - Planes
+ *     parameters:
+ *       - in: query
+ *         name: precioMaximo
+ *         schema:
+ *           type: number
+ *         description: Filtrar por precio (opcional).
+ *       - in: query
+ *         name: categoria
+ *         schema:
+ *           type: string
+ *         description: Filtrar por categoría (opcional).
  *     responses:
  *       200:
  *         description: Lista de planes.
  */
 router.get('/', (req, res) => {
-    res.send(PLANES)
-})
+    const { precioMaximo, categoria } = req.query;
+    const planesFiltrados = PLANES;
+
+    // Si se proporciona un filtro de precio, lo aplicamos
+    if (precioMaximo) {
+        planesFiltrados = planesFiltrados.filter(plan => plan.precio <= parseFloat(precioMaximo));
+    }
+
+    // Si se proporciona un filtro de categoría, lo aplicamos
+    if (categoria) {
+        planesFiltrados = planesFiltrados.filter(plan => plan.categoria === categoria);
+    }
+
+    res.json(planesFiltrados);
+});
+
 
 /**
  * @swagger
@@ -167,7 +192,12 @@ router.delete('/:planId', (req, res) => {
     if (planIndex === -1) {
         return res.status(400).json({ error: `El plan ${id} no existe.` });
     }
+    // Compruebo si algún miembro tiene el plan asociado
+    const miembrosConPlan = MIEMBROS.filter(miembro => miembro.planId === id);
 
+    if (miembrosConPlan.length > 0) {
+        return res.status(400).json({ error: `El plan ${id} no se puede eliminar porque está asociado a miembros.` });
+    }
     // Eliminar el plan de la lista de PLANES
     PLANES.splice(planIndex, 1);
 
