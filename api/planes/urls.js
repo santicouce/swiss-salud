@@ -20,7 +20,7 @@ const { validarEstructuraPlan } = require('./validadores');
  *         name: categoria
  *         schema:
  *           type: string
- *         description: Filtrar por categoría (opcional).
+ *         description: Filtrar por categoría (opcional). Puede ser baja, media o superior.
  *     responses:
  *       200:
  *         description: Lista de planes.
