@@ -31,11 +31,13 @@ app.get('/', (req, res) => {
 const rutasFamilias = require('./familias/urls');
 const rutasMiembros = require('./miembros/urls');
 const rutasPlanes = require('./planes/urls');
+const rutasReportes = require('./reportes/urls');
 
 // Usa las rutas importadas en tu aplicación
 app.use('/familias', rutasFamilias);
 app.use('/miembros', rutasMiembros);
 app.use('/planes', rutasPlanes);
+app.use('/reportes', rutasReportes);
 
 
 app.listen(port, () => {
