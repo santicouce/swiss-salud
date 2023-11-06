@@ -42,3 +42,4 @@ Para ver la documentacion completa de la API acceder a la ruta /api-docs
 - La familia tiene un presupuesto mensual que se setea al crear la familia. A medidca que se van agregando miembros, se verificara que haya presupuesto disponible para el pago del plan asociado al nuevo miembro.
 - Se considera que las familias tienen presupuesto bajo si su presupuesto actual es menor que el precio del plan mas barato que estamos ofreciendo.
 - Un plan puede ser de categoria superior, media o baja.
+- Un miembro es elegible a renovar su cobertura proxima a vencer si: falta menos de un mes para su fecha de fin de cobertura, el estado de onboarding es completo y su grupo familiar tiene mas de 4 miembros asociados.
