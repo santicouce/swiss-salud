@@ -190,4 +190,34 @@ router.delete('/:familiaId/miembros/:miembroId', (req, res) => {
     res.send('Miembro borrado exitosamente!, id: ' + miembroId);
 })
 
+/**
+ * @swagger
+ * /familias/{familiaId}/miembros:
+ *   get:
+ *     summary: Obtener todos los miembros pertenecientes a la familia
+ *     tags:
+ *       - Familias
+ *     parameters:
+ *       - in: path
+ *         name: familiaId
+ *         required: true
+ *         description: ID de la familia a la cual pertenecera el miembro a borrar
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Lista de miembros pertenecientes a la familia.
+ *       400:
+ *         description: Error en la solicitud
+ */
+router.get('/:familiaId/miembros', (req, res) => {
+    const id = parseInt(req.params.familiaId);
+    const familia = FAMILIAS.find(f => f.id === id);
+    if (!familia) {
+        return res.status(400).json({ error: `La familia ${id} no existe.` });
+    }
+    const miembros = MIEMBROS.filter(m => m.familiaId === id);
+    res.send(miembros);
+})
+
 module.exports = router;

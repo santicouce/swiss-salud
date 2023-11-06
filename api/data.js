@@ -51,7 +51,35 @@ const MIEMBROS = [
     }
 ];
 
+const PLANES = [
+    {
+        "id": 1,
+        "nombre": "Silver plan",
+        "descripcion": "Plan que contiene beneficios basicos",
+        "precio": 1000,
+    },
+    {
+        "id": 2,
+        "nombre": "Golden plan",
+        "descripcion": "Plan que contiene beneficios completos",
+        "precio": 2000,
+    },
+    {
+        "id": 3,
+        "nombre": "Platinum plan",
+        "descripcion": "Plan que contiene beneficios medios",
+        "precio": 3000,
+    },
+    {
+        "id": 4,
+        "nombre": "Copper plan",
+        "descripcion": "Plan que contiene beneficios completos y extras",
+        "precio": 4000,
+    }
+];
+
 module.exports = {
   FAMILIAS,
   MIEMBROS,
+  PLANES,
 };

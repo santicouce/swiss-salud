@@ -24,14 +24,18 @@ app.get('/', (req, res) => {
  *     description: Operaciones relacionadas con familias
  *   - name: Miembros
  *     description: Operaciones relacionadas con miembros de familias
+ *   - name: Planes
+ *     description: Operaciones relacionadas con planes de salud
  */
 
-const familiasRoutes = require('./familias/urls');
-const miembrosRoutes = require('./miembros/urls');
+const rutasFamilias = require('./familias/urls');
+const rutasMiembros = require('./miembros/urls');
+const rutasPlanes = require('./planes/urls');
 
 // Usa las rutas importadas en tu aplicación
-app.use('/familias', familiasRoutes);
-app.use('/miembros', miembrosRoutes);
+app.use('/familias', rutasFamilias);
+app.use('/miembros', rutasMiembros);
+app.use('/planes', rutasPlanes);
 
 
 app.listen(port, () => {

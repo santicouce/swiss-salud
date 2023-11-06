@@ -17,7 +17,25 @@ router.get('/', (req, res) => {
     res.send(MIEMBROS)
 })
 
-router.patch('/:id', (req, res) => {
+/**
+ * @swagger
+ * /miembros/{miembroId}:
+ *   patch:
+ *     summary: Obtener todos las miembros.
+ *     tags:
+ *       - Miembros
+ *     responses:
+ *       201:
+ *         description: Lista de miembros.
+ *     parameters:
+ *       - in: path
+ *         name: miembroId
+ *         required: true
+ *         description: ID del miembro a actualizar
+ *         schema:
+ *           type: integer
+ */
+router.patch('/:miembroId', (req, res) => {
     const id = parseInt(req.params.id);
     const miembro = MIEMBROS.find(m => m.id === id);
     if (!miembro) {
