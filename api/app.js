@@ -1,6 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDef = require('./swaggerDef');
+
+// Configura Swagger
+const swaggerSpec = swaggerJSDoc(swaggerDef);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(express.json());
 
@@ -10,6 +17,15 @@ app.get('/', (req, res) => {
 
 
 // Importa las rutas de "familias" y "miembros"
+/**
+ * @swagger
+ * tags:
+ *   - name: Familias
+ *     description: Operaciones relacionadas con familias
+ *   - name: Miembros
+ *     description: Operaciones relacionadas con miembros de familias
+ */
+
 const familiasRoutes = require('./familias/urls');
 const miembrosRoutes = require('./miembros/urls');
 

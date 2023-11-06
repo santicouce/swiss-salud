@@ -26,3 +26,8 @@ Se incluyen metodos para dar de alta, modificar, borrar, y combinar las entidade
 - Obtener listado de todos los planes.
 
 Ademas, los metodos para obtener informacion, permitiran filtrar estos datos a traves de parametros opcionales que se detallaran en la documentacion del API.
+
+
+## Documentacion
+
+Para ver la documentacion completa de la API acceder a la ruta /api-docs

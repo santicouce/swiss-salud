@@ -2,18 +2,19 @@ const express = require('express');
 const router = express.Router();
 const { MIEMBROS } = require('../data');
 
+/**
+ * @swagger
+ * /miembros:
+ *   get:
+ *     summary: Obtener todos las miembros.
+ *     tags:
+ *       - Miembros
+ *     responses:
+ *       201:
+ *         description: Lista de miembros.
+ */
 router.get('/', (req, res) => {
     res.send(MIEMBROS)
-})
-
-router.delete('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const miembro = MIEMBROS.find(m => m.id === id);
-    if (!miembro) {
-        return res.status(400).json({ error: `El miembro ${id} no existe.` });
-    }
-    MIEMBROS.splice(MIEMBROS.indexOf(miembro), 1);
-    res.send('Miembro eliminado exitosamente!, id: ' + id);
 })
 
 router.patch('/:id', (req, res) => {

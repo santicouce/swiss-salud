@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/santicouce/arquitectura-web#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   }
 }
