@@ -10,8 +10,8 @@ app.get('/', (req, res) => {
 
 
 // Importa las rutas de "familias" y "miembros"
-const familiasRoutes = require('./familias');
-const miembrosRoutes = require('./miembros');
+const familiasRoutes = require('./familias/urls');
+const miembrosRoutes = require('./miembros/urls');
 
 // Usa las rutas importadas en tu aplicación
 app.use('/familias', familiasRoutes);

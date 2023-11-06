@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { FAMILIAS, MIEMBROS } = require('./data');
+const { FAMILIAS, MIEMBROS } = require('../data');
 const { validarEstructuraFamilia } = require('./validadores');
+const { crearMiembro } = require('../miembros/utils');
 
 
 router.get('/', (req, res) => {
@@ -44,6 +45,11 @@ router.patch('/:id', (req, res) => {
         familia.metodoPago = metodoPago;
     }
     res.send('Familia actualizada exitosamente!, id: ' + id);
+})
+
+router.post('/:id/miembros', (req, res) => {
+    nuevoId = crearMiembro(req, res);
+    res.send('Miembro creado exitosamente!, id: ' + nuevoId);
 })
 
 module.exports = router;

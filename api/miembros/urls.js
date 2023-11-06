@@ -1,18 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { FAMILIAS, MIEMBROS } = require('./data');
-const { validarEstructuraMiembro } = require('./validadores');
-
+const { MIEMBROS } = require('../data');
 
 router.get('/', (req, res) => {
     res.send(MIEMBROS)
-})
-router.post('/', validarEstructuraMiembro, (req, res) => {
-    const nuevoMiembro = req.body;
-    const ultimoID = MIEMBROS.length > 0 ? MIEMBROS[MIEMBROS.length - 1].id : null;
-    nuevoMiembro.id = ultimoID ? ultimoID + 1 : 1;
-    MIEMBROS.push(nuevoMiembro);
-    res.send('Miembro creado exitosamente!, id: ' + nuevoMiembro.id);
 })
 
 router.delete('/:id', (req, res) => {
