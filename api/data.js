@@ -74,14 +74,14 @@ const PLANES = [
         "nombre": "Golden plan",
         "descripcion": "Plan que contiene beneficios completos",
         "precio": 2000,
-        "categoria": "medio",
+        "categoria": "media",
     },
     {
         "id": 3,
         "nombre": "Platinum plan",
         "descripcion": "Plan que contiene beneficios medios",
         "precio": 3000,
-        "categoria": "medio",
+        "categoria": "media",
     },
     {
         "id": 4,

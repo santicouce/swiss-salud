@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
  *         name: categoria
  *         schema:
  *           type: string
- *         description: Filtrar por categoría.
+ *         description: Filtrar por categoría. (baja, media, superior)
  */
 router.get('/:planId', (req, res) => {
     const id = parseInt(req.params.planId);
@@ -77,6 +77,7 @@ router.get('/:planId', (req, res) => {
  *             nombre: "Plan X1000"
  *             descripcion: "Plan que contiene beneficios basicos hasta mil dolares de cobertura"
  *             precio: 2000
+ *             categoria: "baja"
  */
 router.post('/', validarEstructuraPlan, (req, res) => {
     const nuevoPlan = req.body;

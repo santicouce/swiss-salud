@@ -85,7 +85,7 @@ router.delete('/:familiaId', (req, res) => {
  * @swagger
  * /familias/{familiaId}:
  *   patch:
- *     summary: Actualiza los datos de una familia por su ID
+ *     summary: Actualiza los datos de una familia
  *     tags:
  *       - Familias
  *     parameters:
@@ -128,7 +128,7 @@ router.patch('/:familiaId', (req, res) => {
  * @swagger
  * /familias/{familiaId}/miembros:
  *   post:
- *     summary: Actualiza los datos de una familia por su ID
+ *     summary: Crear un miembro perteneciente a la familia.
  *     tags:
  *       - Familias
  *     parameters:
@@ -165,7 +165,7 @@ router.post('/:familiaId/miembros', (req, res) => {
  * @swagger
  * /familias/{familiaId}/miembros/{miembroId}:
  *   delete:
- *     summary: Actualiza los datos de una familia por su ID
+ *     summary: Borrar un miembro perteneciente a una familia.
  *     tags:
  *       - Familias
  *     parameters:
@@ -225,9 +225,72 @@ router.get('/:familiaId/miembros', (req, res) => {
 
 /**
  * @swagger
+ * /{familiaId}/miembros/{miembroId}:
+ *   patch:
+ *     summary: Actualizar los datos de un miembro perteneciente a la familia.
+ *     tags:
+ *       - Familias
+ *     responses:
+ *       201:
+ *         description: Lista de miembros.
+ *     parameters:
+ *       - in: path
+ *         name: miembroId
+ *         required: true
+ *         description: ID del miembro a actualizar
+ *         schema:
+ *           type: integer
+  *       - in: path
+ *         name: familiaId
+ *         required: true
+ *         description: ID de la familia a la cual pertenece el miembro
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             nombre: "Santiago"
+ *             apellido: "Couce"
+ *             fechaNacimiento: "01-01-2000"
+ *             inicioCobertura: "01-01-2024"
+ *             finCobertura: "01-01-2025"
+ *             planId: 1
+ */
+router.patch('/:familiaId/miembros/:miembroId', (req, res) => {
+    const id = parseInt(req.params.miembroId);
+    const miembro = MIEMBROS.find(m => m.id === id);
+    if (!miembro) {
+        return res.status(400).json({ error: `El miembro ${id} no existe.` });
+    }
+    const { nombre, apellido, fechaNacimiento, familiaId, inicioCobertura, finCobertura } = req.body;
+    if (nombre) {
+        miembro.nombre = nombre;
+    }
+    if (apellido) {
+        miembro.apellido = apellido;
+    }
+    if (fechaNacimiento) {
+        miembro.fechaNacimiento = fechaNacimiento;
+    }
+    if (familiaId) {
+        miembro.familiaId = familiaId;
+    }
+    if (inicioCobertura) {
+        miembro.inicioCobertura = inicioCobertura;
+    }
+    if (finCobertura) {
+        miembro.finCobertura = finCobertura;
+    }
+    res.send('Miembro actualizado exitosamente!, id: ' + id);
+})
+
+/**
+ * @swagger
  * /familias/avisar-poco-presupuesto:
  *   post:
- *     summary: Enviar correo electrónico de aviso a familias con presupuesto bajo.
+ *     summary: Enviar correo electrónico a familias con presupuesto bajo.
  *     tags:
  *       - Familias
  *     responses:
