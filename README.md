@@ -33,6 +33,7 @@ Ademas, los metodos para obtener informacion, permitiran filtrar estos datos a t
 
 Para ver la documentación completa de la API acceder a la ruta /api-docs
 Localmente sería http://localhost:3000/api-docs
+Se implemento el uso de la libreria swagger-jsdoc swagger-ui-express para generar la documentación.
 
 ## Logica de negocio
 
