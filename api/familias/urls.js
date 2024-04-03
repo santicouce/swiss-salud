@@ -483,7 +483,6 @@ router.patch('/:familiaId/miembros/:miembroId', (req, res) => {
  */
 router.post('/avisar-poco-presupuesto', (req, res) => {
     const precioPlanMasBarato = obtenerPrecioPlanMasBarato();
-
     FAMILIAS.forEach(familia => {
         if (familia.presupuesto < precioPlanMasBarato) {
             console.log('Email enviado a la familia con presupuesto bajo: ' + familia.apellido);

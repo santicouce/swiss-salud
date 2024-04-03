@@ -10,7 +10,7 @@ const FAMILIAS = [
         "id": 2,
         "apellido": "Couce",
         "metodoPago": "cheque",
-        "presupuesto": 50000,
+        "presupuesto": 500,
     }
 ];
 
