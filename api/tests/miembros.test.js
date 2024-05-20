@@ -51,7 +51,6 @@ describe('GET /miembros', () => {
     ];
 
     const response = await request(app).get('/miembros').expect(200);
-
     expect(response.body).toEqual(expectedMembers);
   });
 });
