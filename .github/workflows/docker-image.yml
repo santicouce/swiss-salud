@@ -8,11 +8,39 @@ on:
 
 jobs:
 
-  build:
-
+  push_to_docker_hub:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build ./api --file ./api/Dockerfile --tag my-image-name:$(date +%s)
+      - name: Check out repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ secrets.DOCKER_USER }}/swiss-salud
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./api
+          file: ./api/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/swiss-salud:${{ github.sha }}
+          labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: Deploy to render
+        if: github.ref == 'refs/heads/main'
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_URL }}
+        run: |
+          curl "$deploy_url"
