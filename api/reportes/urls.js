@@ -185,37 +185,5 @@ router.get('/familias/:familiaId/informe', (req, res) => {
     res.json(informeFamilia);
 });
 
-// Función para calcular el plan más usado en una lista de miembros
-function calcularPlanMasUsado(miembros) {
-    const planesUsados = {};
-
-    // Contar cuántas veces se usa cada plan en la lista de miembros
-    miembros.forEach(miembro => {
-        const planId = miembro.planId;
-        if (planId !== null) {
-            if (planesUsados[planId]) {
-                planesUsados[planId]++;
-            } else {
-                planesUsados[planId] = 1;
-            }
-        }
-    });
-
-    // Encontrar el plan más usado
-    let planMasUsadoId = null;
-    let maxUsos = 0;
-
-    for (const planId in planesUsados) {
-        if (planesUsados[planId] > maxUsos) {
-            maxUsos = planesUsados[planId];
-            planMasUsadoId = planId;
-        }
-    }
-
-    // Buscar el plan más usado en la lista de PLANES
-    const planMasUsado = PLANES.find(plan => plan.id === parseInt(planMasUsadoId));
-
-    return planMasUsado;
-}
 
 module.exports = router;
