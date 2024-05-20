@@ -16,22 +16,31 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repo
+        uses: actions/checkout@v3
+      
+      - name: Check if package-lock.json exists
+        run: test -f ./api/package-lock.json
+        continue-on-error: true
       
       - name: Use Node.js ${{ matrix.node-version }}
+        if: success()
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       
       - name: Install dependencies
+        if: success()
         run: npm ci
         working-directory: ./api
       
       - name: Build the project
+        if: success()
         run: npm run build --if-present
         working-directory: ./api
       
       #- name: Run tests
+      #  if: success()
       #  run: npm test
       #  working-directory: ./api
