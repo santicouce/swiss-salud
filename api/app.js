@@ -12,7 +12,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Bienvenido a Swiss Salud!')
+    res.send('Bienvenido a Swiss Salud!!')
 })
 
 
