@@ -1,14 +1,5 @@
 const request = require('supertest');
 const app = require('../app');
-let server;
-
-beforeAll(() => {
-  server = app.listen(3000);
-});
-
-afterAll((done) => {
-  server.close(done);
-});
 
 describe('GET /miembros', () => {
   it('debería devolver una lista de miembros', async () => {
