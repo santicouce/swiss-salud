@@ -43,3 +43,4 @@ app.use('/reportes', rutasReportes);
 app.listen(port, () => {
     console.log(`API escuchando en puerto ${port}`)
 })
+module.exports = app;
