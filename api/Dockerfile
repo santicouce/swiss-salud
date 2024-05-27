@@ -12,7 +12,7 @@ FROM node:${NODE_VERSION}-alpine
 
 # Use production node environment by default.
 ENV NODE_ENV production
-
+ENV NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
 
 WORKDIR /usr/src/app
 
