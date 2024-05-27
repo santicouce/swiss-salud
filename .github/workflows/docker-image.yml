@@ -30,8 +30,8 @@ jobs:
           images: ${{ secrets.DOCKER_USER }}/swiss-salud
 
       - name: Save new relic key as env variable
-          run: |
-            echo "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }}" > .env
+        run: |
+          echo "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }}" > .env
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
