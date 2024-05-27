@@ -11,8 +11,9 @@ ARG NODE_VERSION=20.9.0
 FROM node:${NODE_VERSION}-alpine
 
 # Use production node environment by default.
-ENV NODE_ENV production
+ENV NODE_ENV=production
 ENV NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
+ENV NEW_RELIC_APP_NAME=swiss-salud
 
 WORKDIR /usr/src/app
 

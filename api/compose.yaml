@@ -14,7 +14,7 @@ services:
     environment:
       - NEW_RELIC_NO_CONFIG_FILE=true
       - NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
-      - NEW_RELIC_APP_NAME=node-api
+      - NEW_RELIC_APP_NAME=swiss-salud
       - NODE_ENV=production
     ports:
       - 3000:3000
