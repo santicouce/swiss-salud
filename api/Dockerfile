@@ -35,4 +35,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the application.
-CMD node app.js
+CMD --experimental-loader=newrelic/esm-loader.mjs node app.js
