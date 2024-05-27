@@ -1,10 +1,11 @@
+require('newrelic');
+
 const express = require('express')
 const app = express()
 const port = 3000
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 const swaggerDef = require('./swaggerDef');
-
 // Configura Swagger
 const swaggerSpec = swaggerJSDoc(swaggerDef);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
